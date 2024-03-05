@@ -126,12 +126,32 @@ exports.getBankDetail = asyncHandler(async (req, res, next) => {
       new ErrorResponse(`Bank not found with the id of ${bankId}`, 404)
     );
   }
+
   let data;
   if (isAdmin) {
-    data = await BankDetails.find({ bankId: bank._id });
+    data = await BankDetails.find({ bankId: bank._id }).populate("userId"); // Populate user details
   } else {
-    data = await BankDetails.find({ bankId: bank._id, userId: userId });
+    data = await BankDetails.find({
+      bankId: bank._id,
+      userId: userId,
+    }).populate("userId"); // Populate user details
   }
+
+  console.log(data);
+  res.json({ data });
+});
+
+exports.getBankDetailWithoutUser = asyncHandler(async (req, res, next) => {
+  const bankId = req.params.bankId;
+  const bank = await BankData.findById(bankId);
+  if (!bank) {
+    return next(
+      new ErrorResponse(`Bank not found with the id of ${bankId}`, 404)
+    );
+  }
+  const data = await BankDetails.find({
+    bankId: bank._id,
+  }).populate("userId");
 
   console.log(data);
   res.json({ data });

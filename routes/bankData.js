@@ -8,6 +8,7 @@ const {
   addBankDetails,
   getBankDetail,
   getBankDetailByUser,
+  getBankDetailWithoutUser,
   getBank,
   updateBankDetail,
   deleteBankDetail,
@@ -30,5 +31,6 @@ router
 router
   .route("/getDetailsbyUser/:bankId/:BankDetailsUser")
   .get(getBankDetailByUser);
+router.route("/getDetailsWithoutUser/:bankId").get(getBankDetailWithoutUser);
 
 module.exports = router;

@@ -16,19 +16,15 @@ let bankDetailSchema = new mongoose.Schema(
     },
     checkNo: {
       type: String,
-      required: true,
     },
     payee: {
       type: String,
-      required: true,
     },
     memo: {
       type: String,
-      required: true,
     },
     category: {
       type: String,
-      required: true,
     },
     payment: {
       type: String,
